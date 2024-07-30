@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
+
 using namespace std;
+
 class Spacecraft {
 private:
     string name;
@@ -8,18 +10,31 @@ private:
     int crewCapacity;
 
 public:
-    Spacecraft(const string& spacecraftName, float initialFuel, int capacity)
-        : name(spacecraftName), fuel(initialFuel), crewCapacity(capacity) {}
+    // Constructor using the this pointer
+    Spacecraft(const string& name, float fuel, int crewCapacity) {
+        this->name = name;
+        this->fuel = fuel;
+        this->crewCapacity = crewCapacity;
+    }
 
+    // Method to launch the spacecraft
     void launch() {
-        if (fuel > 0) {
-            cout << name << " is launching with " << fuel << " units of fuel." << endl;
+        if (this->fuel > 0) {
+            cout << this->name << " is launching with " << this->fuel << " units of fuel." << endl;
         } else {
-            cout << name << " cannot launch due to insufficient fuel." << endl;
+            cout << this->name << " cannot launch due to insufficient fuel." << endl;
         }
     }
 
+    // Method to land the spacecraft
     void land() {
-        cout << name << " is landing." << endl;
+        cout << this->name << " is landing." << endl;
+    }
+
+    // Method to refuel the spacecraft and return the current object for method chaining
+    Spacecraft& refuel(float amount) {
+        this->fuel += amount;
+        cout << this->name << " has been refueled to " << this->fuel << " units of fuel." << endl;
+        return *this;
     }
 };
