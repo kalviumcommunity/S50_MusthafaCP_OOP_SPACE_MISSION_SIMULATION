@@ -1,24 +1,39 @@
 #include <iostream>
 #include <string>
+
 using namespace std;
-class Astronaut
-{
+
+class Astronaut {
 private:
     string name;
     string role;
     int experience;
 
 public:
-    Astronaut(const string &astronautName, const string &astronautRole, int astronautExperience)
-        : name(astronautName), role(astronautRole), experience(astronautExperience) {}
-
-    void performEVA()
-    {
-        cout << name << " is performing an EVA." << endl;
+    // Constructor using the this pointer
+    Astronaut(const string& name, const string& role, int experience) {
+        this->name = name;
+        this->role = role;
+        this->experience = experience;
     }
 
-    void conductExperiment(const string &experimentName)
-    {
-        cout << name << " is conducting experiment: " << experimentName << "." << endl;
+    // Method to perform an EVA
+    void performEVA() {
+        cout << this->name << " is performing an EVA." << endl;
+    }
+
+    // Method to conduct an experiment
+    void conductExperiment(const string& experimentName) {
+        cout << this->name << " is conducting experiment: " << experimentName << "." << endl;
+    }
+
+    // Method to return the current object (for demonstration purposes)
+    Astronaut* getSelf() {
+        return this;
+    }
+
+    // Method to get the astronaut's name
+    string getName() const {
+        return this->name;
     }
 };
