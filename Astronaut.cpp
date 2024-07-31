@@ -10,7 +10,10 @@ private:
     int experience;
 
 public:
-    // Constructor using the this pointer
+    // Default constructor
+    Astronaut() : name(""), role(""), experience(0) {}
+
+    // Parameterized constructor
     Astronaut(const string& name, const string& role, int experience) {
         this->name = name;
         this->role = role;
@@ -35,5 +38,10 @@ public:
     // Method to get the astronaut's name
     string getName() const {
         return this->name;
+    }
+    
+    // Method to get the astronaut's role
+    string getRole() const {
+        return this->role;
     }
 };
