@@ -5,13 +5,16 @@
 
 using namespace std;
 
-int main() {
+
+int main()
+{
     int NUM_ASTRONAUTS;
     cout << "Enter the number of astronauts: ";
     cin >> NUM_ASTRONAUTS;
-    cin.ignore(); 
+    cin.ignore();
 
-    Astronaut astronauts[NUM_ASTRONAUTS];
+    // Dynamic memory allocation for astronauts
+    Astronaut **astronauts = new Astronaut *[NUM_ASTRONAUTS];
 
     string astronautName;
     string astronautRole;
@@ -19,23 +22,27 @@ int main() {
 
     string roles[] = {"Commander", "Pilot", "Engineer", "Scientist"};
 
-    // Collect astronaut details
-    for (int i = 0; i < NUM_ASTRONAUTS; ++i) {
+    for (int i = 0; i < NUM_ASTRONAUTS; ++i)
+    {
         cout << "Enter the name of astronaut " << (i + 1) << ": ";
         getline(cin, astronautName);
-        
+
         int roleChoice;
         cout << "Choose a role for astronaut " << (i + 1) << ":" << endl;
-        for (int j = 0; j < 4; ++j) {
+        for (int j = 0; j < 4; ++j)
+        {
             cout << j + 1 << ". " << roles[j] << endl;
         }
         cout << "Enter role number: ";
         cin >> roleChoice;
         cin.ignore();
-        
-        if (roleChoice >= 1 && roleChoice <= 4) {
+
+        if (roleChoice >= 1 && roleChoice <= 4)
+        {
             astronautRole = roles[roleChoice - 1];
-        } else {
+        }
+        else
+        {
             cout << "Invalid choice. Defaulting to Scientist." << endl;
             astronautRole = "Scientist";
         }
@@ -44,7 +51,7 @@ int main() {
         cin >> astronautExperience;
         cin.ignore();
 
-        astronauts[i] = Astronaut(astronautName, astronautRole, astronautExperience);
+        astronauts[i] = new Astronaut(astronautName, astronautRole, astronautExperience);
     }
 
     // Spacecraft setup
@@ -59,33 +66,59 @@ int main() {
     cout << "Enter the crew capacity of the spacecraft: ";
     cin >> spacecraftCrewCapacity;
 
-    Spacecraft spacecraft(spacecraftName, spacecraftFuel, spacecraftCrewCapacity);
+    // Dynamic memory allocation for spacecraft
+    Spacecraft *spacecraft = new Spacecraft(spacecraftName, spacecraftFuel, spacecraftCrewCapacity);
 
+    cout << endl
+         << endl;
 
     // Spacecraft launch
-    spacecraft.launch();
+    spacecraft->launch();
 
     // Astronaut tasks
-    for (int i = 0; i < NUM_ASTRONAUTS; ++i) {
-        if (astronauts[i].getRole() == "Engineer") {
-            cout << astronauts[i].getName() << " is performing maintenance tasks." << endl;
-        } else if (astronauts[i].getRole() == "Scientist") {
-            astronauts[i].conductExperiment("Microgravity Study");
-        } else if (astronauts[i].getRole() == "Pilot") {
-            cout << astronauts[i].getName() << " is assisting with navigation." << endl;
-        } else if (astronauts[i].getRole() == "Commander") {
-            cout << astronauts[i].getName() << " is overseeing the mission." << endl;
+    for (int i = 0; i < NUM_ASTRONAUTS; ++i)
+    {
+        if (astronauts[i]->getRole() == "Engineer")
+        {
+            cout << astronauts[i]->getName() << " is performing maintenance tasks." << endl;
         }
-        astronauts[i].performEVA();
+        else if (astronauts[i]->getRole() == "Scientist")
+        {
+            astronauts[i]->conductExperiment("Microgravity Study");
+        }
+        else if (astronauts[i]->getRole() == "Pilot")
+        {
+            cout << astronauts[i]->getName() << " is assisting with navigation." << endl;
+        }
+        else if (astronauts[i]->getRole() == "Commander")
+        {
+            cout << astronauts[i]->getName() << " is overseeing the mission." << endl;
+        }
+        astronauts[i]->performEVA();
     }
 
-    spacecraft.refuel(50.0).launch();
-    spacecraft.land();
+    spacecraft->refuel(50.0).launch();
+    spacecraft->land();
 
-    for (int i = 0; i < NUM_ASTRONAUTS; ++i) {
-        Astronaut *self = astronauts[i].getSelf();
-        cout << "Current astronaut object: " << self->getName() << endl;
+    for (int i = 0; i < NUM_ASTRONAUTS; ++i)
+    {
+        Astronaut *self = astronauts[i]->getSelf();
+        cout << "Current astronaut object" << i + 1 << ": " << endl
+             << self->getName() << endl
+             << self->getRole() << endl
+             << self->getExperience() << " years experienced" << endl;
+
+        cout << endl;
+        cout << endl;
     }
+
+    // Deallocating memory
+    delete spacecraft;
+    for (int i = 0; i < NUM_ASTRONAUTS; ++i)
+    {
+        delete astronauts[i];
+    }
+    delete[] astronauts;
 
     return 0;
 }

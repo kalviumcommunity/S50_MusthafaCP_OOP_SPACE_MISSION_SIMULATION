@@ -3,45 +3,52 @@
 
 using namespace std;
 
-class Astronaut {
+
+class Astronaut
+{
 private:
     string name;
     string role;
     int experience;
 
 public:
-    // Default constructor
     Astronaut() : name(""), role(""), experience(0) {}
 
-    // Parameterized constructor
-    Astronaut(const string& name, const string& role, int experience) {
+    Astronaut(const string &name, const string &role, int experience)
+    {
         this->name = name;
         this->role = role;
         this->experience = experience;
     }
 
-    // Method to perform an EVA
-    void performEVA() {
+    void performEVA()
+    {
         cout << this->name << " is performing an EVA." << endl;
     }
 
-    // Method to conduct an experiment
-    void conductExperiment(const string& experimentName) {
+    void conductExperiment(const string &experimentName)
+    {
         cout << this->name << " is conducting experiment: " << experimentName << "." << endl;
     }
 
-    // Method to return the current object (for demonstration purposes)
-    Astronaut* getSelf() {
+    Astronaut *getSelf()
+    {
         return this;
     }
 
-    // Method to get the astronaut's name
-    string getName() const {
+    string getName() const
+    {
         return this->name;
     }
-    
-    // Method to get the astronaut's role
-    string getRole() const {
+
+    string getRole() const
+    {
         return this->role;
     }
+
+    int getExperience() const
+    {
+        return this->experience;
+    }
 };
+
