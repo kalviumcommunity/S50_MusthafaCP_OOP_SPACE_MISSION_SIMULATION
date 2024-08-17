@@ -3,22 +3,26 @@
 
 using namespace std;
 
-
 class Astronaut
 {
 private:
+    static int totalAstronauts;
     string name;
     string role;
     int experience;
 
 public:
-    Astronaut() : name(""), role(""), experience(0) {}
-
     Astronaut(const string &name, const string &role, int experience)
     {
         this->name = name;
         this->role = role;
         this->experience = experience;
+        totalAstronauts++;
+    }
+
+    ~Astronaut()
+    {
+        totalAstronauts--;
     }
 
     void performEVA()
@@ -50,5 +54,12 @@ public:
     {
         return this->experience;
     }
+
+    static int getTotalAstronauts()
+    {
+        return totalAstronauts;
+    }
 };
 
+
+int Astronaut::totalAstronauts = 0;

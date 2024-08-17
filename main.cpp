@@ -5,30 +5,22 @@
 
 using namespace std;
 
-
 int main()
 {
-    int NUM_ASTRONAUTS;
-    cout << "Enter the number of astronauts: ";
-    cin >> NUM_ASTRONAUTS;
-    cin.ignore();
-
-    // Dynamic memory allocation for astronauts
-    Astronaut **astronauts = new Astronaut *[NUM_ASTRONAUTS];
-
     string astronautName;
     string astronautRole;
     int astronautExperience;
-
     string roles[] = {"Commander", "Pilot", "Engineer", "Scientist"};
+    vector<Astronaut*> astronauts;
 
-    for (int i = 0; i < NUM_ASTRONAUTS; ++i)
+    char addMore;
+    do
     {
-        cout << "Enter the name of astronaut " << (i + 1) << ": ";
+        cout << "Enter the name of the astronaut: ";
         getline(cin, astronautName);
 
         int roleChoice;
-        cout << "Choose a role for astronaut " << (i + 1) << ":" << endl;
+        cout << "Choose a role for the astronaut:" << endl;
         for (int j = 0; j < 4; ++j)
         {
             cout << j + 1 << ". " << roles[j] << endl;
@@ -47,14 +39,19 @@ int main()
             astronautRole = "Scientist";
         }
 
-        cout << "Enter the experience (in years) of astronaut " << (i + 1) << ": ";
+        cout << "Enter the experience (in years) of the astronaut: ";
         cin >> astronautExperience;
         cin.ignore();
 
-        astronauts[i] = new Astronaut(astronautName, astronautRole, astronautExperience);
-    }
+        astronauts.push_back(new Astronaut(astronautName, astronautRole, astronautExperience));
 
-    // Spacecraft setup
+        cout << "Add another astronaut? (y/n): ";
+        cin >> addMore;
+        cin.ignore();
+
+    } while (addMore == 'y' || addMore == 'Y');
+
+
     string spacecraftName;
     float spacecraftFuel;
     int spacecraftCrewCapacity;
@@ -66,44 +63,43 @@ int main()
     cout << "Enter the crew capacity of the spacecraft: ";
     cin >> spacecraftCrewCapacity;
 
-    // Dynamic memory allocation for spacecraft
     Spacecraft *spacecraft = new Spacecraft(spacecraftName, spacecraftFuel, spacecraftCrewCapacity);
 
-    cout << endl
-         << endl;
+    cout << endl << endl;
 
-    // Spacecraft launch
     spacecraft->launch();
 
-    // Astronaut tasks
-    for (int i = 0; i < NUM_ASTRONAUTS; ++i)
+    for (auto astronaut : astronauts)
     {
-        if (astronauts[i]->getRole() == "Engineer")
+        if (astronaut->getRole() == "Engineer")
         {
-            cout << astronauts[i]->getName() << " is performing maintenance tasks." << endl;
+            cout << astronaut->getName() << " is performing maintenance tasks." << endl;
         }
-        else if (astronauts[i]->getRole() == "Scientist")
+        else if (astronaut->getRole() == "Scientist")
         {
-            astronauts[i]->conductExperiment("Microgravity Study");
+            astronaut->conductExperiment("Microgravity Study");
         }
-        else if (astronauts[i]->getRole() == "Pilot")
+        else if (astronaut->getRole() == "Pilot")
         {
-            cout << astronauts[i]->getName() << " is assisting with navigation." << endl;
+            cout << astronaut->getName() << " is assisting with navigation." << endl;
         }
-        else if (astronauts[i]->getRole() == "Commander")
+        else if (astronaut->getRole() == "Commander")
         {
-            cout << astronauts[i]->getName() << " is overseeing the mission." << endl;
+            cout << astronaut->getName() << " is overseeing the mission." << endl;
         }
-        astronauts[i]->performEVA();
+        astronaut->performEVA();
     }
 
     spacecraft->refuel(50.0).launch();
     spacecraft->land();
 
-    for (int i = 0; i < NUM_ASTRONAUTS; ++i)
+    cout << "Total number of astronauts: " << Astronaut::getTotalAstronauts() << endl;
+    cout << "Total number of missions: " << Spacecraft::getMissionCount() << endl;
+
+    for (int i = 0; i < astronauts.size(); ++i)
     {
         Astronaut *self = astronauts[i]->getSelf();
-        cout << "Current astronaut object" << i + 1 << ": " << endl
+        cout << "Current astronaut " << i + 1 << ": " << endl
              << self->getName() << endl
              << self->getRole() << endl
              << self->getExperience() << " years experienced" << endl;
@@ -112,13 +108,11 @@ int main()
         cout << endl;
     }
 
-    // Deallocating memory
     delete spacecraft;
-    for (int i = 0; i < NUM_ASTRONAUTS; ++i)
+    for (auto astronaut : astronauts)
     {
-        delete astronauts[i];
+        delete astronaut;
     }
-    delete[] astronauts;
-
+    
     return 0;
 }

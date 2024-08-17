@@ -6,6 +6,7 @@ using namespace std;
 class Spacecraft
 {
 private:
+    static int missionCount;
     string name;
     float fuel;
     int crewCapacity;
@@ -23,6 +24,7 @@ public:
         if (this->fuel > 0)
         {
             cout << this->name << " is launching with " << this->fuel << " units of fuel." << endl;
+            missionCount++;
         }
         else
         {
@@ -41,4 +43,11 @@ public:
         cout << this->name << " has been refueled to " << this->fuel << " units of fuel." << endl;
         return *this;
     }
+
+    static int getMissionCount()
+    {
+        return missionCount;
+    }
 };
+
+int Spacecraft::missionCount = 0;
