@@ -14,9 +14,60 @@ private:
 public:
     Spacecraft(const string &name, float fuel, int crewCapacity)
     {
-        this->name = name;
-        this->fuel = fuel;
-        this->crewCapacity = crewCapacity;
+        setName(name);
+        setFuel(fuel);
+        setCrewCapacity(crewCapacity);
+    }
+
+    string getName() const
+    {
+        return this->name;
+    }
+
+    void setName(const string &name)
+    {
+        if (!name.empty())
+        {
+            this->name = name;
+        }
+        else
+        {
+            this->name = "Unnamed Spacecraft";
+        }
+    }
+
+    float getFuel() const
+    {
+        return this->fuel;
+    }
+
+    void setFuel(float fuel)
+    {
+        if (fuel >= 0)
+        {
+            this->fuel = fuel;
+        }
+        else
+        {
+            this->fuel = 0;
+        }
+    }
+
+    int getCrewCapacity() const
+    {
+        return this->crewCapacity;
+    }
+
+    void setCrewCapacity(int crewCapacity)
+    {
+        if (crewCapacity > 0)
+        {
+            this->crewCapacity = crewCapacity;
+        }
+        else
+        {
+            this->crewCapacity = 1; 
+        }
     }
 
     void launch()
@@ -39,7 +90,7 @@ public:
 
     Spacecraft &refuel(float amount)
     {
-        this->fuel += amount;
+        setFuel(this->fuel + amount);
         cout << this->name << " has been refueled to " << this->fuel << " units of fuel." << endl;
         return *this;
     }
