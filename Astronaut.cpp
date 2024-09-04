@@ -12,17 +12,70 @@ private:
     int experience;
 
 public:
+    // Constructor
     Astronaut(const string &name, const string &role, int experience)
     {
-        this->name = name;
-        this->role = role;
-        this->experience = experience;
+        setName(name);
+        setRole(role);
+        setExperience(experience);
         totalAstronauts++;
     }
 
+    // Destructor
     ~Astronaut()
     {
         totalAstronauts--;
+    }
+
+    string getName() const
+    {
+        return this->name;
+    }
+
+    void setName(const string &name)
+    {
+        if (!name.empty())
+        {
+            this->name = name;
+        }
+        else
+        {
+            this->name = "Unknown";
+        }
+    }
+
+    string getRole() const
+    {
+        return this->role;
+    }
+
+    void setRole(const string &role)
+    {
+        if (!role.empty())
+        {
+            this->role = role;
+        }
+        else
+        {
+            this->role = "Scientist";
+        }
+    }
+
+    int getExperience() const
+    {
+        return this->experience;
+    }
+
+    void setExperience(int experience)
+    {
+        if (experience >= 0)
+        {
+            this->experience = experience;
+        }
+        else
+        {
+            this->experience = 0;
+        }
     }
 
     void performEVA()
@@ -40,26 +93,10 @@ public:
         return this;
     }
 
-    string getName() const
-    {
-        return this->name;
-    }
-
-    string getRole() const
-    {
-        return this->role;
-    }
-
-    int getExperience() const
-    {
-        return this->experience;
-    }
-
     static int getTotalAstronauts()
     {
         return totalAstronauts;
     }
 };
-
 
 int Astronaut::totalAstronauts = 0;
