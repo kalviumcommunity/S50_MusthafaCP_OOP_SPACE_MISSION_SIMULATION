@@ -11,13 +11,21 @@ private:
     float fuel;
     int crewCapacity;
 
-public:
+public: 
+    //Constructor
     Spacecraft(const string &name, float fuel, int crewCapacity)
     {
         setName(name);
         setFuel(fuel);
         setCrewCapacity(crewCapacity);
     }
+
+    //Destructor
+    ~Spacecraft()
+    {
+        missionCount--;
+    }
+
 
     string getName() const
     {
@@ -66,7 +74,7 @@ public:
         }
         else
         {
-            this->crewCapacity = 1; 
+            this->crewCapacity = 1; // minimum crew capacity
         }
     }
 
