@@ -3,6 +3,7 @@
 
 using namespace std;
 
+// Abstract base class
 class Person
 {
 protected:
@@ -32,16 +33,14 @@ public:
         }
     }
 
-    // Virtual function to demonstrate polymorphism
-    virtual void introduce() const
-    {
-        cout << "Hello, I am " << this->name << " (Person)." << endl;
-    }
+    // Pure virtual function to make Person an abstract class
+    virtual void introduce() const = 0; 
 
     // Virtual Destructor
     virtual ~Person() {}
 };
 
+// Derived class: Astronaut
 class Astronaut : public Person
 {
 private:
@@ -98,12 +97,11 @@ public:
         }
     }
 
-    // Overriding the introduce method to showcase polymorphism
+    // Overriding the pure virtual function
     void introduce() const override
     {
         cout << "I am Astronaut " << this->name << " with the role of " << this->role << " and " << this->experience << " years of experience." << endl;
     }
-
 
     void performEVA()
     {
@@ -126,4 +124,5 @@ public:
     }
 };
 
+// Initializing static member
 int Astronaut::totalAstronauts = 0;
