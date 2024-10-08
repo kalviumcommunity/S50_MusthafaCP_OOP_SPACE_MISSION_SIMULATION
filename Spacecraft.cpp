@@ -32,10 +32,14 @@ public:
         }
     }
 
+    // Virtual function to demonstrate polymorphism
     virtual void launch() const
     {
-        cout << "Launching the vehicle..." << endl;
+        cout << this->name << " (Vehicle) is launching..." << endl;
     }
+
+    // Virtual Destructor to ensure proper cleanup
+    virtual ~Vehicle() {}
 };
 
 
@@ -94,16 +98,17 @@ public:
         }
     }
 
-    void launch() override
+    // Overriding the virtual function for polymorphism
+    void launch() const override
     {
         if (this->fuel > 0)
         {
-            cout << this->name << " is launching with " << this->fuel << " units of fuel." << endl;
+            cout << this->name << " (Spacecraft) is launching with " << this->fuel << " units of fuel." << endl;
             missionCount++;
         }
         else
         {
-            cout << this->name << " cannot launch due to insufficient fuel." << endl;
+            cout << this->name << " (Spacecraft) cannot launch due to insufficient fuel." << endl;
         }
     }
 

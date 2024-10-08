@@ -9,6 +9,7 @@ protected:
     string name;
 
 public:
+    // Constructor
     Person(const string &name)
     {
         setName(name);
@@ -30,8 +31,16 @@ public:
             this->name = "Unknown";
         }
     }
-};
 
+    // Virtual function to demonstrate polymorphism
+    virtual void introduce() const
+    {
+        cout << "Hello, I am " << this->name << " (Person)." << endl;
+    }
+
+    // Virtual Destructor
+    virtual ~Person() {}
+};
 
 class Astronaut : public Person
 {
@@ -88,6 +97,13 @@ public:
             this->experience = 0;
         }
     }
+
+    // Overriding the introduce method to showcase polymorphism
+    void introduce() const override
+    {
+        cout << "I am Astronaut " << this->name << " with the role of " << this->role << " and " << this->experience << " years of experience." << endl;
+    }
+
 
     void performEVA()
     {
