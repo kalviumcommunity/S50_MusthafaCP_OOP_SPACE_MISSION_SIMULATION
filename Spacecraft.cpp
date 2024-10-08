@@ -3,6 +3,7 @@
 
 using namespace std;
 
+// Abstract base class
 class Vehicle
 {
 protected:
@@ -32,17 +33,14 @@ public:
         }
     }
 
-    // Virtual function to demonstrate polymorphism
-    virtual void launch() const
-    {
-        cout << this->name << " (Vehicle) is launching..." << endl;
-    }
+    // Pure virtual function to make Vehicle an abstract class
+    virtual void launch() const = 0;
 
     // Virtual Destructor to ensure proper cleanup
     virtual ~Vehicle() {}
 };
 
-
+// Derived class
 class Spacecraft : public Vehicle
 {
 private:
@@ -98,7 +96,7 @@ public:
         }
     }
 
-    // Overriding the virtual function for polymorphism
+    // Overriding the pure virtual function
     void launch() const override
     {
         if (this->fuel > 0)
