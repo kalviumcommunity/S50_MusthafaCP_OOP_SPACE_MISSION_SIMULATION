@@ -3,29 +3,17 @@
 
 using namespace std;
 
-class Spacecraft
+class Vehicle
 {
-private:
-    static int missionCount;
+protected:
     string name;
-    float fuel;
-    int crewCapacity;
 
-public: 
-    //Constructor
-    Spacecraft(const string &name, float fuel, int crewCapacity)
+public:
+    // Constructor
+    Vehicle(const string &name)
     {
         setName(name);
-        setFuel(fuel);
-        setCrewCapacity(crewCapacity);
     }
-
-    //Destructor
-    ~Spacecraft()
-    {
-        missionCount--;
-    }
-
 
     string getName() const
     {
@@ -40,8 +28,36 @@ public:
         }
         else
         {
-            this->name = "Unnamed Spacecraft";
+            this->name = "Unnamed Vehicle";
         }
+    }
+
+    virtual void launch() const
+    {
+        cout << "Launching the vehicle..." << endl;
+    }
+};
+
+
+class Spacecraft : public Vehicle
+{
+private:
+    static int missionCount;
+    float fuel;
+    int crewCapacity;
+
+public:
+    // Constructor
+    Spacecraft(const string &name, float fuel, int crewCapacity) : Vehicle(name)
+    {
+        setFuel(fuel);
+        setCrewCapacity(crewCapacity);
+    }
+
+    // Destructor
+    ~Spacecraft()
+    {
+        missionCount--;
     }
 
     float getFuel() const
@@ -74,11 +90,11 @@ public:
         }
         else
         {
-            this->crewCapacity = 1; // minimum crew capacity
+            this->crewCapacity = 1;
         }
     }
 
-    void launch()
+    void launch() override
     {
         if (this->fuel > 0)
         {

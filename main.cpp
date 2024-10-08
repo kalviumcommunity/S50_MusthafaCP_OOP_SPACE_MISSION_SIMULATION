@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include <string>
 #include "Astronaut.cpp"
 #include "Spacecraft.cpp"
@@ -11,7 +12,8 @@ int main()
     string astronautRole;
     int astronautExperience;
     string roles[] = {"Commander", "Pilot", "Engineer", "Scientist"};
-    vector<Astronaut*> astronauts;
+
+    vector<Astronaut *> astronauts;
 
     char addMore;
     do
@@ -51,7 +53,6 @@ int main()
 
     } while (addMore == 'y' || addMore == 'Y');
 
-
     string spacecraftName;
     float spacecraftFuel;
     int spacecraftCrewCapacity;
@@ -65,7 +66,8 @@ int main()
 
     Spacecraft *spacecraft = new Spacecraft(spacecraftName, spacecraftFuel, spacecraftCrewCapacity);
 
-    cout << endl << endl;
+    cout << endl
+         << endl;
 
     spacecraft->launch();
 
@@ -93,8 +95,10 @@ int main()
     spacecraft->refuel(50.0).launch();
     spacecraft->land();
 
-    cout << "Total number of astronauts: " << Astronaut::getTotalAstronauts() << endl;
-    cout << "Total number of missions: " << Spacecraft::getMissionCount() << endl;
+    cout << endl
+         << "Total number of astronauts: " << Astronaut::getTotalAstronauts() << endl;
+    cout << "Total number of missions: " << Spacecraft::getMissionCount() << endl
+         << endl;
 
     for (int i = 0; i < astronauts.size(); ++i)
     {
@@ -113,6 +117,6 @@ int main()
     {
         delete astronaut;
     }
-    
+
     return 0;
 }
