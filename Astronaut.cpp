@@ -3,28 +3,15 @@
 
 using namespace std;
 
-class Astronaut
+class Person
 {
-private:
-    static int totalAstronauts;
+protected:
     string name;
-    string role;
-    int experience;
 
 public:
-    // Constructor
-    Astronaut(const string &name, const string &role, int experience)
+    Person(const string &name)
     {
         setName(name);
-        setRole(role);
-        setExperience(experience);
-        totalAstronauts++;
-    }
-
-    // Destructor
-    ~Astronaut()
-    {
-        totalAstronauts--;
     }
 
     string getName() const
@@ -42,6 +29,30 @@ public:
         {
             this->name = "Unknown";
         }
+    }
+};
+
+
+class Astronaut : public Person
+{
+private:
+    static int totalAstronauts;
+    string role;
+    int experience;
+
+public:
+    // Constructor
+    Astronaut(const string &name, const string &role, int experience) : Person(name)
+    {
+        setRole(role);
+        setExperience(experience);
+        totalAstronauts++;
+    }
+
+    // Destructor
+    ~Astronaut()
+    {
+        totalAstronauts--;
     }
 
     string getRole() const
