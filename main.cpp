@@ -100,14 +100,10 @@ int main()
     cout << "Total number of missions: " << Spacecraft::getMissionCount() << endl
          << endl;
 
+    cout << "List of all astronauts:" << endl;
     for (int i = 0; i < astronauts.size(); ++i)
     {
-        Astronaut *self = astronauts[i]->getSelf();
-        cout << "Current astronaut " << i + 1 << ": " << endl
-             << self->getName() << endl
-             << self->getRole() << endl
-             << self->getExperience() << " years experienced" << endl;
-
+        astronauts[i]->introduce();
         cout << endl;
         cout << endl;
     }
