@@ -41,6 +41,7 @@ public:
 };
 
 // Derived class
+// Spacecraft class is responsible or need to change only when we need to manipulate spacecraft data. ( SRP )
 class Spacecraft : public Vehicle
 {
 private:

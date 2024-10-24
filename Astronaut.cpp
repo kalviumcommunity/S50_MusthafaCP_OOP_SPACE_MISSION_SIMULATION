@@ -41,6 +41,7 @@ public:
 };
 
 // Derived class: Astronaut
+// Astronaut class is responsible or need to change only when we need to manipulate astronaut data. ( SRP )
 class Astronaut : public Person
 {
 private:
