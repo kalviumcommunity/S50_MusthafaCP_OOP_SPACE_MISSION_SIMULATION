@@ -34,7 +34,7 @@ public:
     }
 
     // Pure virtual function to make Person an abstract class
-    virtual void introduce() const = 0; 
+    virtual void introduce() const = 0;
 
     // Virtual Destructor
     virtual ~Person() {}
@@ -42,6 +42,7 @@ public:
 
 // Derived class: Astronaut
 // Astronaut class is responsible or need to change only when we need to manipulate astronaut data. ( SRP )
+// Applying the Open/Closed Principle (OCP) If i want to add more functionalities i will be able to extend this class and create another classes, eg : PilotAstronaut class, EngineerAstronaut class ( OCP ).
 class Astronaut : public Person
 {
 private:

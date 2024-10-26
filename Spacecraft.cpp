@@ -42,6 +42,7 @@ public:
 
 // Derived class
 // Spacecraft class is responsible or need to change only when we need to manipulate spacecraft data. ( SRP )
+// Applying the Open/Closed Principle (OCP) If i want to add more functionalities i will be able to extend this class and create another classes, eg : CargoSpacecraft class, PassangerSpacecraft class ( OCP ).
 class Spacecraft : public Vehicle
 {
 private:
