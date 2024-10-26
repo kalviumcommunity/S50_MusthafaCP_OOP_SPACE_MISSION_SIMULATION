@@ -4,6 +4,8 @@
 using namespace std;
 
 // Abstract base class
+// Since Astronaut inherits from the Person class, the Astronaut class should be designed so it can always be used in place of Person in the future. ( LSP )
+
 class Person
 {
 protected:
