@@ -4,6 +4,7 @@
 using namespace std;
 
 // Abstract base class
+// Since Spacecraft inherits from the Vehicle class, the Spacecraft class should be designed so it can always be used in place of Vehicle in the future. ( LSP )
 class Vehicle
 {
 protected:
